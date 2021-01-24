@@ -1,0 +1,214 @@
+#include <Windows.h>
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+
+
+void clear(char arr[], int size){ 
+	int i;
+	for(i=0;i<size;i++){
+		arr[i] = NULL;
+	}
+	
+}
+int main(void)
+{
+	
+	HANDLE hComm;
+	char ComPortName[] = "\\\\.\\COM3";
+	 BOOL Status;
+	 
+	 /*----------------------------------- Opening the Serial Port --------------------------------------------*/
+	 hComm = CreateFile(ComPortName,                  // Name of the Port to be Opened
+                       GENERIC_READ | GENERIC_WRITE, // Read/Write Access
+                       0,                            // No Sharing, ports cant be shared
+                       NULL,                         // No Security
+                       OPEN_EXISTING,                // Open existing port only
+                       0,                            // Non Overlapped I/O
+                       NULL);                        // Null for Comm Devices
+                                         
+                       
+        
+    /*------------------------------- Setting the Parameters for the SerialPort ------------------------------*/
+    
+    DCB dcbSerialParams = {0}; // Initializing DCB structure
+    dcbSerialParams.DCBlength = sizeof(dcbSerialParams);
+    
+	dcbSerialParams.BaudRate = CBR_9600;   // Setting BaudRate = 9600
+    dcbSerialParams.ByteSize = 8;          // Setting ByteSize = 8
+    dcbSerialParams.StopBits = ONESTOPBIT; // Setting StopBits = 1
+    dcbSerialParams.Parity = NOPARITY;     // Setting Parity = None
+    Status = SetCommState(hComm, &dcbSerialParams);
+    
+    
+    
+    /*------------------------------------ Setting Timeouts --------------------------------------------------*/
+    
+    COMMTIMEOUTS timeouts = {0};
+
+    timeouts.ReadIntervalTimeout = 100;
+    timeouts.ReadTotalTimeoutConstant = 100;
+    timeouts.ReadTotalTimeoutMultiplier = 10;
+    timeouts.WriteTotalTimeoutConstant = 100;
+    timeouts.WriteTotalTimeoutMultiplier = 10;
+    
+        
+    /*----------------------------- Writing a Character to Serial Port---------*/
+    
+   
+    
+  
+    
+    char command  ;    
+    DWORD dNoOFBytestoWrite;     // No of bytes to write into the port
+    DWORD dNoOFBytestoWritee; 
+    DWORD dNoOfBytesWritten = 0; // No of bytes written to the port
+    DWORD dNoOfBytesWrittenn = 0;
+	DWORD dwEventMask;
+	DWORD NoBytesRead =0;
+	
+	printf("##  WELCOME TO GTU ARDUINO LAB           ##\n");
+	printf("##  STUDENT NAME: TANAY BENSU YURTTURK   ##\n");
+	printf("##  PLEASE SELECT FROM THE FOLLOWING     ##\n");
+	printf("##  MENU :                               ##\n");
+	printf("(a) TURN ON LED ON ARDUINO \n"); 
+	printf("(b) TURN OFF LED ON ARDUINO\n");
+	printf("(f) FLASH ARDUINO LED\n");
+	printf("(s) SEND A NUMBER TO ARDUINO TO COMPUTE SQUARE BY ARDUINO\n");
+	printf("(c) BUTTON PRESS COUNTER\n"); 
+	printf("(p) LED AND SONG SHOW \n");
+    printf("(d) SENSOR \n"); 
+	printf("(e) EXIT\n");
+	
+	while(1){
+	char num[10];
+    char back[50];
+    
+	 
+	 
+	
+	printf("PLEASE SELECT:");
+	fflush(stdin);
+	scanf("%c",&command);
+    dNoOFBytestoWrite = sizeof(command); // Calculating the no of bytes to write into the port
+	
+	if(command=='e'){
+	
+		exit(0);
+		CloseHandle(hComm);
+	}
+	else{
+	
+	//---------------- TURN ON LEDS (LED YAKMA) ---------------------------
+		if(command=='a'){
+			Status = WriteFile(hComm,              // Handle to the Serialport
+                       &command,           // Data to be written to the port
+                       dNoOFBytestoWrite,  // No of bytes to write into the port
+                       &dNoOfBytesWritten, // No of bytes written to the port
+                       NULL);
+                                   
+	}
+        
+        
+    //---------------- TURN OFF LEDS (LED SÖNDÜRME)-------------------------    
+    	if(command=='b'){
+				Status = WriteFile(hComm,             
+                       &command,           
+                       dNoOFBytestoWrite,  
+                       &dNoOfBytesWritten, 
+                       NULL);
+                                   
+	}
+    //-----------------FLASH -------------------------------
+		if(command=='f'){
+		Status = WriteFile(hComm,             
+                       		   &command,           
+                               dNoOFBytestoWrite,  
+                               &dNoOfBytesWritten, 
+                               NULL);
+				                           
+	}
+    //------------------SQUARE-------------------------------	
+		if(command=='s'){	
+			Status = WriteFile(hComm,             
+                       		   &command,           
+                       		   dNoOFBytestoWrite,  
+                       		   &dNoOfBytesWritten, 
+                       		   NULL);
+			printf("Please enter a number : ");
+			fflush(stdin);
+			scanf("%s",num);	
+			
+			DWORD bytes = sizeof(num);
+			Status = WriteFile(hComm,             
+                       		   &num,           
+                       		   bytes,  
+                       		   &dNoOfBytesWrittenn, 
+                       		   NULL);
+            
+        	// sleep(7);
+        	
+       		// Status= SetCommMask(hComm, EV_RXCHAR);
+        	
+    		// Status = WaitCommEvent(hComm, &dwEventMask, NULL); //Wait for the character to be received
+        		
+		 	Status = ReadFile(hComm,             
+           		   		&back,           
+           		   		sizeof(back),  
+           		   		&NoBytesRead, 
+           		   		NULL);
+           		   		 
+                       		   		
+           printf("%s",back);           		   		
+           printf("\n");    
+           clear(back, 50);
+	}
+	//----------------MUSIC----------------------------
+	if(command=='p'){
+    
+	Status = WriteFile(hComm,             
+                       		   &command,           
+                       		   dNoOFBytestoWrite,  
+                       		   &dNoOfBytesWritten, 
+                       		   NULL);	
+}
+	if(command=='c'){
+	char counter[20];
+	
+
+	
+	Status = WriteFile(hComm,             
+                       		   &command,           
+                       		   dNoOFBytestoWrite,  
+                       		   &dNoOfBytesWritten, 
+                       		   NULL);
+	printf("Press the BUTTON\n\n"); 
+	while(1){	 
+	Status = ReadFile(hComm,             
+	           		   		&counter,           
+	           		   		sizeof(counter),  
+	           		   		&NoBytesRead, 
+	           		   		NULL);
+	    
+	printf("%s\n",counter); 
+    }
+	
+}
+ //----------------DISTANCE------------------------    
+	if(command=='d'){
+	Status = WriteFile(hComm,             
+           &command,           
+           dNoOFBytestoWrite,  
+           &dNoOfBytesWritten, 
+           NULL);
+                               
+	}
+	
+}
+}
+return 0;
+}
