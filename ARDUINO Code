@@ -1,0 +1,864 @@
+#include <SoftwareSerial.h>
+#include "math.h"
+
+int trigPin = 5;
+int echoPin = 4;
+int sure;
+int cm;
+int counter = 0;
+int buttonPin = 2;
+String num;
+int numSq,i;
+
+
+
+const int LEDa = 13;  //led to pin 13
+const int LEDb = 12;
+const int LEDc = 11;
+const int LEDd = 9;
+const int LEDe = 8;
+const int LEDf = 7;
+
+
+
+
+void setup(){
+
+  
+  Serial.begin(9600);
+  while(!Serial){
+  ;}
+  Serial.setTimeout(5000);
+    pinMode(10, OUTPUT);
+    pinMode(LEDa, OUTPUT);
+    pinMode(LEDb, OUTPUT);
+    pinMode(LEDc, OUTPUT);
+    pinMode(LEDd, OUTPUT);
+    pinMode(LEDe, OUTPUT);
+    pinMode(LEDf, OUTPUT);
+    pinMode(buttonPin, INPUT);
+
+    pinMode (trigPin, OUTPUT);
+    pinMode (echoPin, INPUT);
+}
+
+void loop() {
+  int buttonState = 0;
+  buttonState = digitalRead(buttonPin);
+    
+  
+  if(Serial.available()> 0){
+  char input=Serial.read(); 
+
+        
+      switch(input){
+
+        case 'a' :
+        digitalWrite(LED_BUILTIN, HIGH);
+        digitalWrite(LEDa, HIGH);
+        digitalWrite(LEDb, HIGH);
+        digitalWrite(LEDc, HIGH);
+        digitalWrite(LEDd, HIGH);
+        digitalWrite(LEDe, HIGH);
+        digitalWrite(LEDf, HIGH);
+    
+          
+        
+         
+        delay(500);
+        break;  
+
+        case 's':
+          
+           num = Serial.readString();
+           delay(10);
+           numSq = num.toInt();
+           numSq*=numSq;
+           Serial.println(numSq);
+           break;
+           
+        case 'p':
+        
+                // play e4
+                delay(600);
+                tone(10, 329.63, 300);
+                digitalWrite(LEDa, HIGH);
+                delay(350);
+                
+                // play d4# 
+                tone(10, 311.13, 300);
+                digitalWrite(LEDb, HIGH);
+                delay(350);
+                
+                // play e4
+                tone( 10, 329.63, 300);
+                digitalWrite(LEDc, HIGH);
+                delay(350);
+                
+                // play d4# 
+                tone( 10,311.13, 300);
+                digitalWrite(LEDd, HIGH);
+                delay(350);
+                
+                // play e4
+                tone(10, 329.63, 300);
+                digitalWrite(LEDe, HIGH);
+                delay(350);
+                
+                // play b3
+                tone( 10, 246.94, 300);
+                digitalWrite(LEDf, HIGH);
+                delay(400);
+                
+                // play d4
+                tone(10, 293.66, 300);
+                digitalWrite(LEDa, LOW);
+                delay(400);
+                
+                // play c4
+                tone(10, 261.63, 300);
+                digitalWrite(LEDb, LOW);
+                delay(400);
+                
+                // play a3
+                tone(10, 220, 900);
+                digitalWrite(LEDc, LOW);
+                delay(1000);
+                
+                // play d3
+                tone(10,146.83,300);
+                digitalWrite(LEDd, LOW);
+                delay(350);
+                
+                //play f3
+                tone(10, 174.61, 300);
+                digitalWrite(LEDe, LOW);
+                delay(400);
+                
+                //play a3
+                tone(10, 220, 300);
+                digitalWrite(LEDf, LOW);
+                delay(400);
+                
+                // play b3
+                tone(10, 246.94, 900);
+                digitalWrite(LEDa, HIGH);delay(40);
+                digitalWrite(LEDb, HIGH);delay(40);
+                digitalWrite(LEDc, HIGH);delay(40);
+                digitalWrite(LEDd, HIGH);delay(40);
+                digitalWrite(LEDe, HIGH);delay(40);
+                digitalWrite(LEDf, HIGH);delay(40);
+                digitalWrite(LEDa, LOW);delay(40);
+                digitalWrite(LEDb, LOW);delay(40);
+                digitalWrite(LEDc, LOW);delay(40);
+                digitalWrite(LEDd, LOW);delay(40);
+                digitalWrite(LEDe, LOW);delay(40);
+                digitalWrite(LEDf, LOW);delay(40);
+                delay(1000);
+                
+                // play f3
+                tone(10, 174.61, 300);
+                digitalWrite(LEDa, HIGH);
+                digitalWrite(LEDf, HIGH);
+                delay(400);
+                
+                // play a3#
+                tone(10, 233.08, 300);
+                digitalWrite(LEDb, HIGH);
+                digitalWrite(LEDe, HIGH);
+                delay(400);
+                
+                // play b3
+                tone(10, 246.94, 300);
+                digitalWrite(LEDc, HIGH);
+                digitalWrite(LEDd, HIGH);
+                delay(400);
+                
+                // play c4
+                tone(10, 261.63, 900);
+                digitalWrite(LEDa, LOW);delay(40);
+                digitalWrite(LEDb, LOW);delay(40);
+                digitalWrite(LEDc, LOW);delay(40);
+                digitalWrite(LEDd, LOW);delay(40);
+                digitalWrite(LEDe, LOW);delay(40);
+                digitalWrite(LEDf, LOW);delay(40);
+                digitalWrite(LEDa, HIGH);delay(40);
+                digitalWrite(LEDb, HIGH);delay(40);
+                digitalWrite(LEDc, HIGH);delay(40);
+                digitalWrite(LEDd, HIGH);delay(40);
+                digitalWrite(LEDe, HIGH);delay(40);
+                digitalWrite(LEDf, HIGH);delay(40);
+                delay(1000);
+                
+                delay(300);
+                
+                // play e4
+                tone(10, 329.63, 300);
+                digitalWrite(LEDa, LOW);
+                digitalWrite(LEDf, LOW);
+                delay(400);
+                
+                // play d4#
+                tone(10, 311.13, 300);
+                digitalWrite(LEDb, LOW);
+                digitalWrite(LEDe, LOW);
+                delay(400);
+                
+                // play e4
+                tone(10, 329.63, 300);
+                digitalWrite(LEDc, LOW);
+                digitalWrite(LEDd, LOW);
+                delay(400);
+                
+                // play d4#
+                tone(10, 311.13, 300);
+                digitalWrite(LEDa, HIGH);delay(40);
+                digitalWrite(LEDb, HIGH);delay(40);
+                delay(400);
+                
+                // play e4
+                tone(10, 329.63, 300);
+                digitalWrite(LEDc, HIGH);delay(40);
+                digitalWrite(LEDd, HIGH);delay(40);
+                delay(400);
+                
+                // play b3
+                tone(10, 246.94, 300);
+                digitalWrite(LEDe, HIGH);delay(40);
+                digitalWrite(LEDf, HIGH);delay(40);
+                delay(400);
+                
+                // play d4
+                tone(10, 293.66, 300);
+                digitalWrite(LEDf, LOW);delay(40);
+                digitalWrite(LEDe, LOW);delay(40);
+                delay(400);
+                
+                // play c4
+                tone(10, 261.63, 300);
+                digitalWrite(LEDd, LOW);delay(40);
+                digitalWrite(LEDc, LOW);delay(40);
+                delay(400);
+                
+                // play a3
+                tone(10, 220, 900);
+                digitalWrite(LEDb, LOW);delay(40);
+                digitalWrite(LEDa, LOW);delay(40);
+                digitalWrite(LEDa, HIGH);delay(40);
+                digitalWrite(LEDb, HIGH);delay(40);
+                digitalWrite(LEDc, HIGH);delay(40);
+                digitalWrite(LEDd, HIGH);delay(40);
+                digitalWrite(LEDe, HIGH);delay(40);
+                digitalWrite(LEDf, HIGH);delay(40);
+                digitalWrite(LEDa, LOW);delay(40);
+                digitalWrite(LEDb, LOW);delay(40);
+                digitalWrite(LEDc, LOW);delay(40);
+                digitalWrite(LEDd, LOW);delay(40);
+                digitalWrite(LEDe, LOW);delay(40);
+                digitalWrite(LEDf, LOW);delay(40);
+                delay(1000);
+                
+                // play d3
+                tone(10, 146.83, 300);
+                digitalWrite(LEDa, HIGH);
+                digitalWrite(LEDf, HIGH);delay(40);
+                digitalWrite(LEDa, LOW);
+                digitalWrite(LEDf, LOW);
+                delay(400);
+                
+                // play f3
+                tone(10, 174.61, 300);
+                digitalWrite(LEDb, HIGH);
+                digitalWrite(LEDe, HIGH);delay(40);
+                digitalWrite(LEDb, LOW);
+                digitalWrite(LEDe, LOW);
+                delay(400);
+                
+                // play a3
+                tone(10, 220, 300);
+                digitalWrite(LEDc, HIGH);
+                digitalWrite(LEDd, HIGH);delay(40);
+                digitalWrite(LEDc, LOW);
+                digitalWrite(LEDd, LOW);
+                delay(400);
+                
+                // play b3
+                tone(10, 246.94, 900);
+                digitalWrite(LEDa, HIGH);
+                digitalWrite(LEDf, HIGH);delay(40);
+                digitalWrite(LEDb, HIGH);
+                digitalWrite(LEDe, HIGH);delay(40);
+                digitalWrite(LEDc, HIGH);
+                digitalWrite(LEDd, HIGH);delay(40);
+                digitalWrite(LEDa, LOW);
+                digitalWrite(LEDf, LOW);delay(40);
+                digitalWrite(LEDb, LOW);
+                digitalWrite(LEDe, LOW);delay(40);
+                digitalWrite(LEDc, LOW);
+                digitalWrite(LEDd, LOW);delay(40);
+                digitalWrite(LEDa, HIGH);
+                digitalWrite(LEDf, HIGH);delay(40);
+                digitalWrite(LEDb, HIGH);
+                digitalWrite(LEDe, HIGH);delay(40);
+                digitalWrite(LEDc, HIGH);
+                digitalWrite(LEDd, HIGH);delay(40);
+                digitalWrite(LEDa, LOW);
+                digitalWrite(LEDf, LOW);delay(40);
+                digitalWrite(LEDb, LOW);
+                digitalWrite(LEDe, LOW);delay(40);
+                digitalWrite(LEDc, LOW);
+                digitalWrite(LEDd, LOW);delay(40);
+                delay(1000);
+                
+                // play f3
+                tone(10, 174.61, 300);
+                digitalWrite(LEDa, HIGH);delay(40);
+                digitalWrite(LEDb, HIGH);
+                delay(400);
+                
+                // play c4
+                tone(10, 261.63, 300);
+                digitalWrite(LEDc, HIGH);delay(40);
+                digitalWrite(LEDd, HIGH);
+                delay(400);
+                
+                // play b3
+                tone(10, 246.94, 300);
+                digitalWrite(LEDe, HIGH);delay(40);
+                digitalWrite(LEDf, HIGH);
+                delay(400);
+                
+                // play a3
+                tone(10, 220, 900);
+                digitalWrite(LEDa, LOW);delay(40);
+                digitalWrite(LEDb, LOW);
+                delay(1000);
+                
+                // play b3
+                tone(10,246.94, 300);
+                digitalWrite(LEDc, LOW);delay(40);
+                digitalWrite(LEDd, LOW);
+                delay(400);
+                
+                 // play c4
+                tone(10, 261.63, 300);
+                digitalWrite(LEDe, LOW);delay(40);
+                digitalWrite(LEDf, LOW);
+                delay(400);
+                
+                // play d4
+                tone(10, 293.66, 300);
+                digitalWrite(LEDa, HIGH);
+                digitalWrite(LEDb, HIGH);
+                digitalWrite(LEDc, HIGH);
+                digitalWrite(LEDd, HIGH);
+                digitalWrite(LEDe, HIGH);
+                digitalWrite(LEDf, HIGH);
+                delay(400);
+                
+                // play e4
+                tone(10, 329.63, 900);
+                digitalWrite(LEDa, LOW);delay(40);
+                digitalWrite(LEDb, LOW);delay(40);
+                digitalWrite(LEDc, LOW);delay(40);
+                digitalWrite(LEDd, LOW);delay(40);
+                digitalWrite(LEDe, LOW);delay(40);
+                digitalWrite(LEDf, LOW);delay(40);
+                digitalWrite(LEDa, HIGH);delay(40);
+                digitalWrite(LEDb, HIGH);delay(40);
+                digitalWrite(LEDc, HIGH);delay(40);
+                digitalWrite(LEDd, HIGH);delay(40);
+                digitalWrite(LEDe, HIGH);delay(40);
+                digitalWrite(LEDf, HIGH);delay(40);
+                delay(1000);
+                
+                // play g3
+                tone(10, 196, 300);
+                digitalWrite(LEDc, LOW);
+                digitalWrite(LEDd, LOW);
+                delay(400);
+                
+                // play f4
+                tone(10, 349.23, 300);
+                digitalWrite(LEDb, LOW);
+                digitalWrite(LEDe, LOW);
+                delay(400);
+                
+                //play e4
+                tone(10, 329.23, 300);
+                digitalWrite(LEDa, LOW);
+                digitalWrite(LEDf, LOW);
+                delay(400);
+                
+                // play d4
+                tone(10, 293.63, 900);
+                digitalWrite(LEDa, HIGH);delay(40);
+                digitalWrite(LEDb, HIGH);delay(40);
+                digitalWrite(LEDc, HIGH);delay(40);
+                digitalWrite(LEDd, HIGH);delay(40);
+                digitalWrite(LEDe, HIGH);delay(40);
+                digitalWrite(LEDf, HIGH);delay(40);
+                digitalWrite(LEDa, LOW);delay(40);
+                digitalWrite(LEDb, LOW);delay(40);
+                digitalWrite(LEDc, LOW);delay(40);
+                digitalWrite(LEDd, LOW);delay(40);
+                digitalWrite(LEDe, LOW);delay(40);
+                digitalWrite(LEDf, LOW);delay(40);
+                delay(1000);
+                
+                // play e3
+                tone(10,164.81, 300);
+                digitalWrite(LEDc, HIGH);
+                digitalWrite(LEDd, HIGH);
+                delay(400);
+                
+                // play e4
+                tone(10, 329.63, 300);
+                digitalWrite(LEDb, HIGH);
+                digitalWrite(LEDe, HIGH);
+                delay(400);
+                
+                // play d4
+                tone(10, 293.63, 300);
+                digitalWrite(LEDa, HIGH);
+                digitalWrite(LEDf, HIGH);
+                delay(400);
+                
+                // play c4
+                tone(10, 261.63, 900);
+                digitalWrite(LEDa, LOW);
+                digitalWrite(LEDb, LOW);
+                digitalWrite(LEDc, LOW);
+                digitalWrite(LEDd, LOW);
+                digitalWrite(LEDe, LOW);
+                digitalWrite(LEDf, LOW);delay(40);
+                digitalWrite(LEDa, HIGH);
+                digitalWrite(LEDb, HIGH);
+                digitalWrite(LEDc, HIGH);
+                digitalWrite(LEDd, HIGH);
+                digitalWrite(LEDe, HIGH);
+                digitalWrite(LEDf, HIGH);
+                digitalWrite(LEDa, LOW);
+                digitalWrite(LEDb, LOW);
+                digitalWrite(LEDc, LOW);
+                digitalWrite(LEDd, LOW);
+                digitalWrite(LEDe, LOW);
+                digitalWrite(LEDf, LOW);delay(40);
+                digitalWrite(LEDa, HIGH);
+                digitalWrite(LEDb, HIGH);
+                digitalWrite(LEDc, HIGH);
+                digitalWrite(LEDd, HIGH);
+                digitalWrite(LEDe, HIGH);
+                digitalWrite(LEDf, HIGH);
+                delay(1000);
+                
+                // play d3
+                tone(10, 146.83, 300);
+                digitalWrite(LEDa, LOW);
+                digitalWrite(LEDb, LOW);
+                delay(400);
+                
+                  // play d4
+                tone(10, 293.63, 300);
+                digitalWrite(LEDc, LOW);
+                digitalWrite(LEDd, LOW);
+                delay(400);
+                
+                // play c4
+                tone(10, 261.63, 300);
+                digitalWrite(LEDe, LOW);
+                digitalWrite(LEDf, LOW);
+                delay(400);
+                
+                // play b3
+                tone(10, 246.94, 900);
+                digitalWrite(LEDa, HIGH);delay(40);
+                digitalWrite(LEDb, HIGH);delay(40);
+                digitalWrite(LEDc, HIGH);delay(40);
+                digitalWrite(LEDd, HIGH);delay(40);
+                digitalWrite(LEDe, HIGH);delay(40);
+                digitalWrite(LEDf, HIGH);delay(40);
+                digitalWrite(LEDa, LOW);delay(40);
+                digitalWrite(LEDb, LOW);delay(40);
+                digitalWrite(LEDc, LOW);delay(40);
+                digitalWrite(LEDd, LOW);delay(40);
+                digitalWrite(LEDe, LOW);delay(40);
+                digitalWrite(LEDf, LOW);delay(40);
+                delay(1000);
+                
+                delay(400);
+                
+                  // play e4
+                delay(600);
+                tone(10, 329.63, 300);
+                digitalWrite(LEDa, HIGH);
+                delay(350);
+                
+                // play d4# 
+                tone(10, 311.13, 300);
+                digitalWrite(LEDb, HIGH);
+                delay(350);
+                
+                // play e4
+                tone( 10, 329.63, 300);
+                digitalWrite(LEDc, HIGH);
+                delay(350);
+                
+                // play d4# 
+                tone( 10,311.13, 300);
+                digitalWrite(LEDd, HIGH);
+                delay(350);
+                
+                // play e4
+                tone(10, 329.63, 300);
+                digitalWrite(LEDe, HIGH);
+                delay(350);
+                
+                // play b3
+                tone( 10, 246.94, 300);
+                digitalWrite(LEDf, HIGH);
+                delay(400);
+                
+                // play d4
+                tone(10, 293.66, 300);
+                digitalWrite(LEDa, LOW);
+                delay(400);
+                
+                // play c4
+                tone(10, 261.63, 300);
+                digitalWrite(LEDb, LOW);
+                delay(400);
+                
+                // play a3
+                tone(10, 220, 900);
+                digitalWrite(LEDc, LOW);
+                delay(1000);
+                
+                // play d3
+                tone(10,146.83,300);
+                digitalWrite(LEDd, LOW);
+                delay(350);
+                
+                //play f3
+                tone(10, 174.61, 300);
+                digitalWrite(LEDe, LOW);
+                delay(400);
+                
+                //play a3
+                tone(10, 220, 300);
+                digitalWrite(LEDf, LOW);
+                delay(400);
+                
+                // play b3
+                tone(10, 246.94, 900);
+                digitalWrite(LEDa, HIGH);delay(40);
+                digitalWrite(LEDb, HIGH);delay(40);
+                digitalWrite(LEDc, HIGH);delay(40);
+                digitalWrite(LEDd, HIGH);delay(40);
+                digitalWrite(LEDe, HIGH);delay(40);
+                digitalWrite(LEDf, HIGH);delay(40);
+                digitalWrite(LEDa, LOW);delay(40);
+                digitalWrite(LEDb, LOW);delay(40);
+                digitalWrite(LEDc, LOW);delay(40);
+                digitalWrite(LEDd, LOW);delay(40);
+                digitalWrite(LEDe, LOW);delay(40);
+                digitalWrite(LEDf, LOW);delay(40);
+                delay(1000);
+                
+                // play f3
+                tone(10, 174.61, 300);
+                digitalWrite(LEDa, HIGH);
+                digitalWrite(LEDf, HIGH);
+                delay(400);
+                
+                // play a3
+                tone(10, 233.08, 300);
+                digitalWrite(LEDb, HIGH);
+                digitalWrite(LEDe, HIGH);
+                delay(400);
+                
+                // play b3
+                tone(10, 246.94, 300);
+                digitalWrite(LEDc, HIGH);
+                digitalWrite(LEDd, HIGH);
+                delay(400);
+                
+                // play c4
+                tone(10, 261.63, 900);
+                digitalWrite(LEDa, LOW);delay(40);
+                digitalWrite(LEDb, LOW);delay(40);
+                digitalWrite(LEDc, LOW);delay(40);
+                digitalWrite(LEDd, LOW);delay(40);
+                digitalWrite(LEDe, LOW);delay(40);
+                digitalWrite(LEDf, LOW);delay(40);
+                digitalWrite(LEDa, HIGH);delay(40);
+                digitalWrite(LEDb, HIGH);delay(40);
+                digitalWrite(LEDc, HIGH);delay(40);
+                digitalWrite(LEDd, HIGH);delay(40);
+                digitalWrite(LEDe, HIGH);delay(40);
+                digitalWrite(LEDf, HIGH);delay(40);
+                delay(1000);
+                
+                delay(300);
+                
+                // play e4
+                delay(600);
+                tone(10, 329.63, 300);
+                digitalWrite(LEDa, LOW);
+                delay(350);
+                
+                // play d4# 
+                tone(10, 311.13, 300);
+                digitalWrite(LEDb, LOW);
+                delay(350);
+                
+                // play e4
+                tone( 10, 329.63, 300);
+                digitalWrite(LEDc, LOW);
+                delay(350);
+                
+                // play d4# 
+                tone( 10,311.13, 300);
+                digitalWrite(LEDd, LOW);
+                delay(350);
+                
+                // play e4
+                tone(10, 329.63, 300);
+                digitalWrite(LEDe,LOW);
+                delay(350);
+                
+                // play b3
+                tone( 10, 246.94, 300);
+                digitalWrite(LEDf, LOW);
+                delay(400);
+                
+                // play d4
+                tone(10, 293.66, 300);
+                digitalWrite(LEDa, HIGH);
+                delay(400);
+                
+                // play c4
+                tone(10, 261.63, 300);
+                digitalWrite(LEDb, HIGH);
+                delay(400);
+                
+                // play a3
+                tone(10, 220, 900);
+                digitalWrite(LEDc, HIGH);
+                delay(1000);
+                
+                // play d3
+                tone(10,146.83,300);
+                digitalWrite(LEDd, HIGH);
+                delay(350);
+                
+                //play f3
+                tone(10, 174.61, 300);
+                digitalWrite(LEDe,HIGH);
+                delay(400);
+                
+                //play a3
+                tone(10, 220, 300);
+                digitalWrite(LEDf, HIGH);
+                delay(400);
+                
+                // play b3
+                tone(10, 246.94, 900);
+                digitalWrite(LEDa, LOW);delay(40);
+                digitalWrite(LEDb, LOW);delay(40);
+                digitalWrite(LEDc, LOW);delay(40);
+                digitalWrite(LEDd, LOW);delay(40);
+                digitalWrite(LEDe, LOW);delay(40);
+                digitalWrite(LEDf, LOW);delay(40);
+                digitalWrite(LEDa, HIGH);delay(40);
+                digitalWrite(LEDb, HIGH);delay(40);
+                digitalWrite(LEDc, HIGH);delay(40);
+                digitalWrite(LEDd, HIGH);delay(40);
+                digitalWrite(LEDe, HIGH);delay(40);
+                digitalWrite(LEDf, HIGH);delay(40);
+                
+                delay(1000);
+                
+                // play f3
+                tone(10, 174.61, 300);
+                digitalWrite(LEDa, LOW);
+                digitalWrite(LEDf, LOW);
+                delay(400);
+                
+                // play c4
+                tone(10, 261.63, 300);
+                digitalWrite(LEDb, LOW);
+                digitalWrite(LEDe, LOW);
+                delay(400);
+                
+                // play b3
+                tone(10, 246.94, 300);
+                digitalWrite(LEDc,LOW);
+                digitalWrite(LEDd, LOW);
+                delay(400);
+                
+                // play a3
+                tone(10, 220, 900);
+                digitalWrite(LEDa, HIGH);delay(40);
+                digitalWrite(LEDb, HIGH);delay(40);
+                digitalWrite(LEDc, HIGH);delay(40);
+                digitalWrite(LEDd, HIGH);delay(40);
+                digitalWrite(LEDe, HIGH);delay(40);
+                digitalWrite(LEDf, HIGH);delay(40);
+                digitalWrite(LEDa, LOW);delay(40);
+                digitalWrite(LEDb, LOW);delay(40);
+                digitalWrite(LEDc, LOW);delay(40);
+                digitalWrite(LEDd, LOW);delay(40);
+                digitalWrite(LEDe, LOW);delay(40);
+                digitalWrite(LEDf, LOW);delay(40);
+                digitalWrite(LEDa, HIGH);delay(40);
+                digitalWrite(LEDb, HIGH);delay(40);
+                digitalWrite(LEDc, HIGH);delay(40);
+                digitalWrite(LEDd, HIGH);delay(40);
+                digitalWrite(LEDe, HIGH);delay(40);
+                digitalWrite(LEDf, HIGH);delay(40);
+                
+                delay(1000);
+              
+                
+                delay(5000);
+            break;
+        
+        
+      case 'b':
+    
+        noTone(10);
+        digitalWrite(LEDa, LOW); 
+        digitalWrite(LEDb, LOW); 
+        digitalWrite(LEDc, LOW); 
+        digitalWrite(LEDd, LOW); 
+        digitalWrite(LEDe, LOW);
+        digitalWrite(LEDf, LOW); 
+        delay(500); 
+        break;
+  
+        
+      case 'f':  
+
+      for(i=0;i<3;i++){
+        digitalWrite(LED_BUILTIN, HIGH);
+        digitalWrite(LEDa, HIGH);
+        digitalWrite(LEDb, HIGH);
+        digitalWrite(LEDc, HIGH);
+        digitalWrite(LEDd, HIGH);
+        digitalWrite(LEDe, HIGH);
+        digitalWrite(LEDf, HIGH);
+        tone(10, 329.63, 300);
+        delay(500); 
+        digitalWrite(LED_BUILTIN, LOW);
+        
+        digitalWrite(LEDa, LOW);
+        digitalWrite(LEDb, LOW);
+        digitalWrite(LEDc, LOW);
+        digitalWrite(LEDd, LOW);
+        digitalWrite(LEDe, LOW);
+        digitalWrite(LEDf, LOW);
+        tone(10, 311.13, 300);
+        delay(500);
+        }
+        break;     
+  
+       
+     case 'c':
+      
+       
+       while(1){
+          
+          Serial.print("COUNTER : ");
+          
+          digitalWrite(LEDa, HIGH);delay(40);
+          digitalWrite(LEDb, HIGH);delay(40);
+          digitalWrite(LEDc, HIGH);delay(40);
+          digitalWrite(LEDd, HIGH);delay(40);
+          digitalWrite(LEDe, HIGH);delay(40);
+          digitalWrite(LEDf, HIGH);delay(40);
+          tone(10, 329.63, 300);
+          digitalWrite(LEDa, LOW);delay(40);
+          digitalWrite(LEDb, LOW);delay(40);
+          digitalWrite(LEDc, LOW);delay(40);
+          digitalWrite(LEDd, LOW);delay(40);
+          digitalWrite(LEDe, LOW);delay(40);
+          digitalWrite(LEDf, LOW);delay(40);
+          tone(10, 311.13, 300);
+          
+          int readd = digitalRead(buttonPin);
+          
+          if(readd == HIGH){  
+            counter=counter+1;
+            Serial.println(counter-1);
+            delay(100);
+          }
+              
+          while(readd==HIGH){
+            delay(100);
+            readd = digitalRead(buttonPin);
+            
+          }
+          while(readd==LOW){
+            delay(100);
+            readd = digitalRead(buttonPin);
+          }
+           
+            
+        }
+        break;
+
+        
+       case 'd':
+       
+      
+       while(1){
+        digitalWrite(trigPin, LOW);
+        delayMicroseconds(10);
+        digitalWrite(trigPin, HIGH);
+        delayMicroseconds(10);
+        digitalWrite(trigPin, LOW);
+        sure = pulseIn(echoPin, HIGH);
+        cm = (sure / 2) / 28.5;
+       if(cm < 2)
+       {
+        digitalWrite(LEDa, HIGH);
+        digitalWrite(LEDb, HIGH);
+        digitalWrite(LEDc, HIGH);
+        digitalWrite(LEDd, HIGH);
+        digitalWrite(LEDe, HIGH);
+        digitalWrite(LEDf, HIGH);
+        
+       }
+       else if(cm<10){
+        digitalWrite(LEDc, HIGH);
+        digitalWrite(LEDd, HIGH);
+        digitalWrite(LEDe, HIGH);
+        digitalWrite(LEDf, HIGH);
+       }
+       else if(cm<20)
+       {
+        digitalWrite(LEDe, HIGH);
+        digitalWrite(LEDf, HIGH);
+       }
+       else{
+        digitalWrite(LEDa, LOW);
+        digitalWrite(LEDb, LOW);
+        digitalWrite(LEDc, LOW);
+        digitalWrite(LEDd, LOW);
+        digitalWrite(LEDe, LOW);
+        digitalWrite(LEDf, LOW);
+       }
+       } 
+       break;
+  
+  
+         
+    
+     
+    }
+    
+  }
+     
+       
+  }
